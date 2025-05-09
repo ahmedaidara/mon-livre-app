@@ -3,67 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Livre - Application de Lecture</title>
+    <title>Lecteur de Livre Élégant</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="book-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <div class="header-content">
-            <h1>Mon Livre</h1>
+        <div class="header-container">
+            <h1>Lecteur de Livre</h1>
             <img src="book-icon.png" alt="Couverture du livre" class="book-cover">
         </div>
         <nav>
-            <button id="theme-toggle" title="Mode sombre/clair">🌙</button>
-            <button id="font-increase" title="Agrandir la police">+</button>
-            <button id="font-decrease" title="Réduire la police">-</button>
-            <button id="favorites-btn">Favoris</button>
+            <button id="theme-toggle" title="Mode sombre/clair" aria-label="Mode sombre/clair"><span class="icon">🌙</span></button>
+            <button id="font-increase" title="Agrandir la police" aria-label="Agrandir la police">+</button>
+            <button id="font-decrease" title="Réduire la police" aria-label="Réduire la police">-</button>
+            <button id="favorites-btn" title="Favoris" aria-label="Favoris">★</button>
         </nav>
     </header>
     <main>
-        <section id="home">
-            <h2>Bienvenue dans votre livre</h2>
-            <img src="book-icon.png" alt="Couverture du livre" class="home-book-cover">
-            <p>Commencez votre lecture en sélectionnant un chapitre ci-dessous :</p>
-            <ul id="chapter-list">
-                <li><a href="#chapter1">Chapitre 1 : L'Aube d'une Aventure</a></li>
-                <li><a href="#chapter2">Chapitre 2 : Les Secrets de la Forêt</a></li>
-                <li><a href="#chapter3">Chapitre 3 : Rencontre avec l'Inconnu</a></li>
-                <li><a href="#chapter4">Chapitre 4 : Le Passage du Temps</a></li>
-                <li><a href="#chapter5">Chapitre 5 : La Fin d'un Cycle</a></li>
-            </ul>
+        <section id="home" class="section">
+            <div class="hero">
+                <img src="book-icon.png" alt="Couverture du livre" class="hero-book-cover">
+                <h2>Bienvenue dans votre aventure littéraire</h2>
+                <p>Plongez dans une expérience de lecture immersive.</p>
+            </div>
+            <div class="chapter-list">
+                <h3>Chapitres</h3>
+                <ul id="chapter-list">
+                    <li><a href="#chapter1">Chapitre 1 : L'Aube d'une Aventure</a></li>
+                    <li><a href="#chapter2">Chapitre 2 : Les Secrets de la Forêt</a></li>
+                    <li><a href="#chapter3">Chapitre 3 : Rencontre avec l'Inconnu</a></li>
+                    <li><a href="#chapter4">Chapitre 4 : Le Passage du Temps</a></li>
+                    <li><a href="#chapter5">Chapitre 5 : La Fin d'un Cycle</a></li>
+                </ul>
+            </div>
         </section>
-        <section id="chapter1" class="chapter">
+        <section id="chapter1" class="section chapter hidden">
             <h2>Chapitre 1 : L'Aube d'une Aventure</h2>
-            <p>Il était une fois, dans un village niché au creux des montagnes, une jeune âme curieuse nommée Éline...</p>
-            <button class="read-aloud" data-chapter="1">Lire à haute voix</button>
-            <button class="add-favorite" data-chapter="1">Ajouter aux favoris</button>
+            <div class="chapter-content">
+                <p>Il était une fois, dans un village niché au creux des montagnes, une jeune âme curieuse nommée Éline...</p>
+            </div>
+            <div class="chapter-actions">
+                <button class="read-aloud" data-chapter="1">Lire à haute voix</button>
+                <button class="add-favorite" data-chapter="1">Ajouter aux favoris</button>
+            </div>
         </section>
-        <section id="chapter2" class="chapter">
+        <section id="chapter2" class="section chapter hidden">
             <h2>Chapitre 2 : Les Secrets de la Forêt</h2>
-            <p>La forêt dense semblait murmurer des secrets anciens à chaque pas d'Éline...</p>
-            <button class="read-aloud" data-chapter="2">Lire à haute voix</button>
-            <button class="add-favorite" data-chapter="2">Ajouter aux favoris</button>
+            <div class="chapter-content">
+                <p>La forêt dense semblait murmurer des secrets anciens à chaque pas d'Éline...</p>
+            </div>
+            <div class="chapter-actions">
+                <button class="read-aloud" data-chapter="2">Lire à haute voix</button>
+                <button class="add-favorite" data-chapter="2">Ajouter aux favoris</button>
+            </div>
         </section>
-        <section id="chapter3" class="chapter">
+        <section id="chapter3" class="section chapter hidden">
             <h2>Chapitre 3 : Rencontre avec l'Inconnu</h2>
-            <p>Une silhouette mystérieuse apparut sous la lueur pâle de la lune...</p>
-            <button class="read-aloud" data-chapter="3">Lire à haute voix</button>
-            <button class="add-favorite" data-chapter="3">Ajouter aux favoris</button>
+            <div class="chapter-content">
+                <p>Une silhouette mystérieuse apparut sous la lueur pâle de la lune...</p>
+            </div>
+            <div class="chapter-actions">
+                <button class="read-aloud" data-chapter="3">Lire à haute voix</button>
+                <button class="add-favorite" data-chapter="3">Ajouter aux favoris</button>
+            </div>
         </section>
-        <section id="chapter4" class="chapter">
+        <section id="chapter4" class="section chapter hidden">
             <h2>Chapitre 4 : Le Passage du Temps</h2>
-            <p>Les années s'écoulaient, mais le mystère restait intact...</p>
-            <button class="read-aloud" data-chapter="4">Lire à haute voix</button>
-            <button class="add-favorite" data-chapter="4">Ajouter aux favoris</button>
+            <div class="chapter-content">
+                <p>Les années s'écoulaient, mais le mystère restait intact...</p>
+            </div>
+            <div class="chapter-actions">
+                <button class="read-aloud" data-chapter="4">Lire à haute voix</button>
+                <button class="add-favorite" data-chapter="4">Ajouter aux favoris</button>
+            </div>
         </section>
-        <section id="chapter5" class="chapter">
+        <section id="chapter5" class="section chapter hidden">
             <h2>Chapitre 5 : La Fin d'un Cycle</h2>
-            <p>Et ainsi, l'histoire d'Éline trouva sa conclusion, ou peut-être un nouveau commencement...</p>
-            <button class="read-aloud" data-chapter="5">Lire à haute voix</button>
-            <button class="add-favorite" data-chapter="5">Ajouter aux favoris</button>
+            <div class="chapter-content">
+                <p>Et ainsi, l'histoire d'Éline trouva sa conclusion, ou peut-être un nouveau commencement...</p>
+            </div>
+            <div class="chapter-actions">
+                <button class="read-aloud" data-chapter="5">Lire à haute voix</button>
+                <button class="add-favorite" data-chapter="5">Ajouter aux favoris</button>
+            </div>
         </section>
-        <section id="favorites" class="hidden">
+        <section id="favorites" class="section hidden">
             <h2>Vos Chapitres Favoris</h2>
             <ul id="favorites-list"></ul>
         </section>
