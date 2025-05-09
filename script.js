@@ -1,85 +1,93 @@
-// script.js
+document.addEventListener('DOMContentLoaded', () => {
+    // Protection contre copie, téléchargement, etc.
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    document.addEventListener('copy', (e) => e.preventDefault());
+    document.addEventListener('cut', (e) => e.preventDefault());
+    document.addEventListener('dragstart', (e) => e.preventDefault());
+    document.addEventListener('selectstart', (e) => e.preventDefault());
 
-const chapters = [
-  {
-    title: "Chapitre 1 : L'aube",
-    content: "Ceci est le début d'une grande aventure. Le soleil se lève sur un monde nouveau..."
-  },
-  {
-    title: "Chapitre 2 : Le doute",
-    content: "L'ombre du doute s'insinue dans l'esprit du héros. Que doit-il faire maintenant ?"
-  },
-  {
-    title: "Chapitre 3 : L'épreuve",
-    content: "Les épreuves surgissent. Chaque pas est un défi, chaque souffle une victoire."
-  },
-  {
-    title: "Chapitre 4 : L'éveil",
-    content: "Une révélation éclaire l'esprit du héros. Tout devient clair."
-  },
-  {
-    title: "Chapitre 5 : Le triomphe",
-    content: "La victoire est à portée. Le monde l'acclame. La légende est née."
-  }
-];
+    // Mode sombre/clair
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+    });
 
-let currentFontSize = 16;
-let favorites = [];
-let currentChapter = null;
+    // Ajustement de la taille de la police
+    const fontIncrease = document.getElementById('font-increase');
+    const fontDecrease = document.getElementById('font-decrease');
+    let fontSize = 16;
 
-function loadChapter(index) {
-  const chapter = chapters[index];
-  document.getElementById("chapter-title").innerText = chapter.title;
-  document.getElementById("chapter-content").innerText = chapter.content;
-  currentChapter = index;
-}
+    fontIncrease.addEventListener('click', () => {
+        if (fontSize < 24) {
+            fontSize += 2;
+            document.body.style.fontSize = `${fontSize}px`;
+        }
+    });
 
-function toggleFavorite() {
-  if (currentChapter !== null && !favorites.includes(currentChapter)) {
-    favorites.push(currentChapter);
-    updateFavorites();
-  }
-}
+    fontDecrease.addEventListener('click', () => {
+        if (fontSize > 12) {
+            fontSize -= 2;
+            document.body.style.fontSize = `${fontSize}px`;
+        }
+    });
 
-function updateFavorites() {
-  const list = document.getElementById("favorites-list");
-  list.innerHTML = "";
-  favorites.forEach(index => {
-    const item = document.createElement("li");
-    item.textContent = chapters[index].title;
-    item.onclick = () => loadChapter(index);
-    list.appendChild(item);
-  });
-}
+    // Gestion des favoris
+    const favoritesBtn = document.getElementById('favorites-btn');
+    const favoritesSection = document.getElementById('favorites');
+    const homeSection = document.getElementById('home');
+    const chapters = document.querySelectorAll('.chapter');
+    const favoritesList = document.getElementById('favorites-list');
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-function readAloud() {
-  const content = document.getElementById("chapter-content").innerText;
-  const synth = window.speechSynthesis;
-  const utterance = new SpeechSynthesisUtterance(content);
-  synth.speak(utterance);
-}
+    favoritesBtn.addEventListener('click', () => {
+        homeSection.classList.add('hidden');
+        chapters.forEach(chapter => chapter.classList.add('hidden'));
+        favoritesSection.classList.remove('hidden');
+        renderFavorites();
+    });
 
-document.getElementById("toggle-mode").onclick = () => {
-  document.body.classList.toggle("dark-mode");
-};
+    document.querySelectorAll('.add-favorite').forEach(button => {
+        button.addEventListener('click', () => {
+            const chapterId = button.getAttribute('data-chapter');
+            if (!favorites.includes(chapterId)) {
+                favorites.push(chapterId);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+                renderFavorites();
+            }
+        });
+    });
 
-document.getElementById("zoom-in").onclick = () => {
-  currentFontSize += 2;
-  document.getElementById("chapter-content").style.fontSize = currentFontSize + "px";
-};
-
-document.getElementById("zoom-out").onclick = () => {
-  currentFontSize = Math.max(12, currentFontSize - 2);
-  document.getElementById("chapter-content").style.fontSize = currentFontSize + "px";
-};
-
-// Sécurité basique : empêche les sélections et le clic droit
-window.onload = () => {
-  document.body.onselectstart = () => false;
-  document.body.oncopy = () => false;
-  document.body.onkeydown = (e) => {
-    if ((e.ctrlKey || e.metaKey) && ["c", "p", "s"].includes(e.key.toLowerCase())) {
-      e.preventDefault();
+    function renderFavorites() {
+        favoritesList.innerHTML = '';
+        favorites.forEach(chapterId => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="#chapter${chapterId}">Chapitre ${chapterId}</a>`;
+            favoritesList.appendChild(li);
+        });
     }
-  };
-};
+
+    // Navigation entre sections
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = anchor.getAttribute('href').substring(1);
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(targetId).classList.remove('hidden');
+        });
+    });
+
+    // Lecture vocale
+    const synth = window.speechSynthesis;
+    document.querySelectorAll('.read-aloud').forEach(button => {
+        button.addEventListener('click', () => {
+            const chapterId = button.getAttribute('data-chapter');
+            const chapterText = document.querySelector(`#chapter${chapterId} p`).textContent;
+            const utterance = new SpeechSynthesisUtterance(chapterText);
+            utterance.lang = 'fr-FR';
+            synth.speak(utterance);
+        });
+    });
+});
