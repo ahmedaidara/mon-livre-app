@@ -25,17 +25,18 @@ const chapters = [
 
 let currentFontSize = 16;
 let favorites = [];
+let currentChapter = null;
 
 function loadChapter(index) {
   const chapter = chapters[index];
   document.getElementById("chapter-title").innerText = chapter.title;
   document.getElementById("chapter-content").innerText = chapter.content;
-  window.currentChapter = index;
+  currentChapter = index;
 }
 
 function toggleFavorite() {
-  if (!favorites.includes(window.currentChapter)) {
-    favorites.push(window.currentChapter);
+  if (currentChapter !== null && !favorites.includes(currentChapter)) {
+    favorites.push(currentChapter);
     updateFavorites();
   }
 }
