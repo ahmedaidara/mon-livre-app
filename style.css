@@ -1,37 +1,87 @@
-/* Style de base pour le mode clair */
+/* style.css */
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    color: black;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 0;
+  font-family: sans-serif;
+  background: #fefefe;
+  color: #333;
+  user-select: none;
+  overflow-x: hidden;
 }
 
-/* Mode sombre */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #121212;
-        color: white;
-    }
+.dark-mode {
+  background: #121212;
+  color: #f1f1f1;
 }
 
-/* Style pour les icônes */
-svg {
-    width: 20px; /* Taille réduite */
-    height: 20px; /* Taille réduite */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  background: gold;
+  color: black;
 }
 
-/* Toggle bouton thème */
-.theme-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
+.logo {
+  height: 40px;
+  margin-right: 10px;
 }
 
-/* Pour s'assurer que le texte est bien visible */
-h1, p {
-    text-align: center;
-    margin-top: 50px;
+.tools button {
+  margin-left: 10px;
+  font-size: 1.2em;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}
+
+.chapters ul,
+.favorites ul {
+  list-style: none;
+  padding: 0;
+}
+
+.chapters li,
+.favorites li {
+  cursor: pointer;
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+}
+
+.reader {
+  margin-top: 1em;
+  padding: 1em;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+
+.dark-mode .reader {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+.controls button {
+  margin-top: 1em;
+  margin-right: 1em;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  background: darkgoldenrod;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  header, main {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .tools {
+    margin-top: 10px;
+  }
 }
