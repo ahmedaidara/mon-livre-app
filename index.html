@@ -1,41 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Livre Numérique</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Livre</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>《 L'Ombre des Mots 》</h1>
-    <button id="toggleTheme">Changer le thème</button>
-  </header>
+    <!-- Contenu principal -->
+    <header>
+        <div class="theme-toggle">
+            <button id="theme-button" aria-label="Toggle theme">
+                <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <!-- Icône du Soleil par défaut -->
+                    <path id="sun-icon" d="M12 2a1 1 0 011 1V4a1 1 0 01-2 0V3a1 1 0 011-1zM12 16a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 8a1 1 0 011 1V9a1 1 0 01-2 0V8a1 1 0 011-1zM5.22 5.22a1 1 0 111.415 1.415l-1.415 1.415a1 1 0 11-1.415-1.415L5.22 5.22zM18.364 5.22a1 1 0 111.415 1.415L18.364 7.05a1 1 0 11-1.415-1.415l1.415-1.415zM18 12a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM6 12a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 10a1 1 0 011 1V11a1 1 0 01-2 0v-1a1 1 0 011-1zM4 12a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM16 4a1 1 0 011 1v1a1 1 0 01-2 0V5a1 1 0 011-1zM16 20a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM4 4a1 1 0 011 1v1a1 1 0 01-2 0V5a1 1 0 011-1zM4 20a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 14a1 1 0 011 1V15a1 1 0 01-2 0v-1a1 1 0 011-1z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
 
-  <nav id="sommaire">
-    <h2>Sommaire</h2>
-    <ul>
-      <li onclick="afficherChapitre(1)">Chapitre 1 : L’appel</li>
-      <li onclick="afficherChapitre(2)">Chapitre 2 : La chute</li>
-    </ul>
-  </nav>
+    <main>
+        <h1>Bienvenue sur *Mon Livre* !</h1>
+        <p>C'est un exemple de site avec le mode clair et sombre.</p>
+    </main>
 
-  <main id="lecture">
-    <article id="chapitre">
-      <h2>Chapitre 1 : L’appel</h2>
-      <p>
-        "La nuit n’était qu’un voile complice, et les mots dansaient comme des lucioles..."
-      </p>
-    </article>
-  </main>
-
-  <footer>
-    <button onclick="changerPolice()">Changer police</button>
-    <button onclick="zoomer(1)">+</button>
-    <button onclick="zoomer(-1)">-</button>
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
-
