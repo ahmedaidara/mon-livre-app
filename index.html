@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Livre Numérique</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>《 L'Ombre des Mots 》</h1>
+    <button id="toggleTheme">Changer le thème</button>
+  </header>
+
+  <nav id="sommaire">
+    <h2>Sommaire</h2>
+    <ul>
+      <li onclick="afficherChapitre(1)">Chapitre 1 : L’appel</li>
+      <li onclick="afficherChapitre(2)">Chapitre 2 : La chute</li>
+    </ul>
+  </nav>
+
+  <main id="lecture">
+    <article id="chapitre">
+      <h2>Chapitre 1 : L’appel</h2>
+      <p>
+        "La nuit n’était qu’un voile complice, et les mots dansaient comme des lucioles..."
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    <button onclick="changerPolice()">Changer police</button>
+    <button onclick="zoomer(1)">+</button>
+    <button onclick="zoomer(-1)">-</button>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
