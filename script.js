@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        themeToggle.querySelector('.icon').textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
     });
 
     // Ajustement de la taille de la police
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         anchor.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = anchor.getAttribute('href').substring(1);
-            document.querySelectorAll('section').forEach(section => {
+            document.querySelectorAll('.section').forEach(section => {
                 section.classList.add('hidden');
             });
             document.getElementById(targetId).classList.remove('hidden');
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.read-aloud').forEach(button => {
         button.addEventListener('click', () => {
             const chapterId = button.getAttribute('data-chapter');
-            const chapterText = document.querySelector(`#chapter${chapterId} p`).textContent;
+            const chapterText = document.querySelector(`#chapter${chapterId} .chapter-content`).textContent;
             const utterance = new SpeechSynthesisUtterance(chapterText);
             utterance.lang = 'fr-FR';
             synth.speak(utterance);
