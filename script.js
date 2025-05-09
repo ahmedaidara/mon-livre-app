@@ -1,11 +1,84 @@
-const themeButton = document.getElementById('theme-button');
-const themeIcon = document.getElementById('theme-icon');
+// script.js
 
-// Fonction pour basculer entre les thèmes
-themeButton.addEventListener('click', () => {
-    if (document.body.classList.contains('dark')) {
-        document.body.classList.remove('dark');
-        themeIcon.innerHTML = '<path d="M12 2a1 1 0 011 1V4a1 1 0 01-2 0V3a1 1 0 011-1zM12 16a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 8a1 1 0 011 1V9a1 1 0 01-2 0V8a1 1 0 011-1zM5.22 5.22a1 1 0 111.415 1.415l-1.415 1.415a1 1 0 11-1.415-1.415L5.22 5.22zM18.364 5.22a1 1 0 111.415 1.415L18.364 7.05a1 1 0 11-1.415-1.415l1.415-1.415zM18 12a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM6 12a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 10a1 1 0 011 1V11a1 1 0 01-2 0v-1a1 1 0 011-1zM4 12a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM16 4a1 1 0 011 1v1a1 1 0 01-2 0V5a1 1 0 011-1zM16 20a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM4 4a1 1 0 011 1v1a1 1 0 01-2 0V5a1 1 0 011-1zM4 20a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 14a1 1 0 011 1V15a1 1 0 01-2 0v-1a1 1 0 011-1z"/>';
-    } else {
-        document.body.classList.add('dark');
-        themeIcon.innerHTML = '<path d="M12 2a1 1 0 011 1V4a1 1 0 01-2 0V3a1 1 0 011-1zM12 16a1 1 0 011 1v1a1 1 0 01-2 0v-1a1 1 0 011-1zM12 8a1 1 0 011 1V9a1 1 0 01-2 0V8a1 1 0 011-1zM5.22 5.22a1 1 0 111.415 1.415l-1.415 1.415a1 1 0 11-1.415-1.415L5.22 5.22zM18.364 5.22a1 1 0 111.415 1.415L18.364 7.05a1 1 0 11-1.415-1.415l1.415-1.415zM18 12a1 1 0 011 1v1a1 1 0 01-2 0v-1
+const chapters = [
+  {
+    title: "Chapitre 1 : L'aube",
+    content: "Ceci est le début d'une grande aventure. Le soleil se lève sur un monde nouveau..."
+  },
+  {
+    title: "Chapitre 2 : Le doute",
+    content: "L'ombre du doute s'insinue dans l'esprit du héros. Que doit-il faire maintenant ?"
+  },
+  {
+    title: "Chapitre 3 : L'épreuve",
+    content: "Les épreuves surgissent. Chaque pas est un défi, chaque souffle une victoire."
+  },
+  {
+    title: "Chapitre 4 : L'éveil",
+    content: "Une révélation éclaire l'esprit du héros. Tout devient clair."
+  },
+  {
+    title: "Chapitre 5 : Le triomphe",
+    content: "La victoire est à portée. Le monde l'acclame. La légende est née."
+  }
+];
+
+let currentFontSize = 16;
+let favorites = [];
+
+function loadChapter(index) {
+  const chapter = chapters[index];
+  document.getElementById("chapter-title").innerText = chapter.title;
+  document.getElementById("chapter-content").innerText = chapter.content;
+  window.currentChapter = index;
+}
+
+function toggleFavorite() {
+  if (!favorites.includes(window.currentChapter)) {
+    favorites.push(window.currentChapter);
+    updateFavorites();
+  }
+}
+
+function updateFavorites() {
+  const list = document.getElementById("favorites-list");
+  list.innerHTML = "";
+  favorites.forEach(index => {
+    const item = document.createElement("li");
+    item.textContent = chapters[index].title;
+    item.onclick = () => loadChapter(index);
+    list.appendChild(item);
+  });
+}
+
+function readAloud() {
+  const content = document.getElementById("chapter-content").innerText;
+  const synth = window.speechSynthesis;
+  const utterance = new SpeechSynthesisUtterance(content);
+  synth.speak(utterance);
+}
+
+document.getElementById("toggle-mode").onclick = () => {
+  document.body.classList.toggle("dark-mode");
+};
+
+document.getElementById("zoom-in").onclick = () => {
+  currentFontSize += 2;
+  document.getElementById("chapter-content").style.fontSize = currentFontSize + "px";
+};
+
+document.getElementById("zoom-out").onclick = () => {
+  currentFontSize = Math.max(12, currentFontSize - 2);
+  document.getElementById("chapter-content").style.fontSize = currentFontSize + "px";
+};
+
+// Sécurité basique : empêche les sélections et le clic droit
+window.onload = () => {
+  document.body.onselectstart = () => false;
+  document.body.oncopy = () => false;
+  document.body.onkeydown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && ["c", "p", "s"].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
+  };
+};
