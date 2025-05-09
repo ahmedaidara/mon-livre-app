@@ -1,61 +1,37 @@
-:root {
-  --bg: #0a0a0f;
-  --text: #f0f0f5;
-  --accent: #00ffe0;
-  --font: 'Orbitron', sans-serif;
-}
-
+/* Style de base pour le mode clair */
 body {
-  margin: 0;
-  font-family: var(--font);
-  background-color: var(--bg);
-  color: var(--text);
-  padding: 1rem;
-  transition: all 0.3s ease;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-header h1 {
-  text-align: center;
-  color: var(--accent);
-  font-size: 2rem;
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: white;
+    }
 }
 
-button {
-  background: var(--accent);
-  color: #000;
-  border: none;
-  padding: 0.6rem 1rem;
-  margin: 0.2rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+/* Style pour les icônes */
+svg {
+    width: 20px; /* Taille réduite */
+    height: 20px; /* Taille réduite */
 }
 
-button:hover {
-  transform: scale(1.05);
+/* Toggle bouton thème */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
+/* Pour s'assurer que le texte est bien visible */
+h1, p {
+    text-align: center;
+    margin-top: 50px;
 }
-
-nav li {
-  margin: 0.5rem 0;
-  cursor: pointer;
-  color: var(--accent);
-}
-
-#lecture {
-  margin-top: 2rem;
-  line-height: 1.8;
-  font-size: 1rem;
-}
-
-/* Thème clair */
-.light {
-  --bg: #fff;
-  --text: #111;
-  --accent: #0066ff;
-}
-
